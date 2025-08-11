@@ -16,7 +16,7 @@
     "ag-ui"
   ],
   "author": "theblazehen",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "react-markdown": "^10.1.0",
