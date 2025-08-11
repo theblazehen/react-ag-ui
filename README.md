@@ -13,6 +13,13 @@ This library provides the core UI components and state management needed to crea
 - **TypeScript Support:** Fully typed for a better developer experience.
 - **Component-Based:** Includes essential components like `MessageList`, `MessageInput`, and `ChatHeader`.
 
+## Demo
+
+![Demo Application](docs/images/demo.png)
+
+
+See the [Demo Application](#demo-application) section for detailed usage instructions.
+
 ## Installation
 
 ```bash
