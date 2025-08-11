@@ -1,5 +1,5 @@
-import React from 'react';
-import { useChat } from '../../context/ChatContext';
+import React, { useMemo } from 'react';
+import { useChat } from '../../hooks/useChat';
 import { UserMessage } from '../UserMessage';
 import { AssistantMessage } from '../AssistantMessage';
 import { Message, ToolCall } from '@ag-ui/client';
@@ -42,84 +42,85 @@ export const MessageList: React.FC = () => {
     );
   }
 
-  // Reduce the flat message list into structured UI Blocks. This runs on every render.
-  const uiBlocks = messages.reduce<UIBlock[]>((acc, message) => {
-    // User messages are simple: they create a new block.
-    if (message.role === 'user') {
-      acc.push({ id: message.id, type: 'user', initiator: message });
-      return acc;
-    }
+  const uiBlocks = useMemo(() => {
+    return messages.reduce<UIBlock[]>((acc, message) => {
+      // User messages are simple: they create a new block.
+      if (message.role === 'user') {
+        acc.push({ id: message.id, type: 'user', initiator: message });
+        return acc;
+      }
 
-    // Assistant message that starts a tool call sequence.
-    if (isToolCallInitiator(message)) {
-      acc.push({
-        id: message.id,
-        type: 'assistant',
-        initiator: message,
-        // Map the tool calls to our UI structure, initially all loading.
-        toolCalls: message.toolCalls.map(tc => ({
-          toolCall: tc,
-          toolResult: null,
-          isLoading: true,
-        })),
-      });
-      return acc;
-    }
-
-    // A tool result message. Find its corresponding block and update it immutably.
-    if (message.role === 'tool') {
-      return acc.map(block => {
-        // If this isn't the block we're looking for, return it unchanged.
-        if (!block.toolCalls?.some(tc => tc.toolCall.id === message.toolCallId)) {
-          return block;
-        }
-        // Otherwise, create a new block with the updated toolCall.
-        return {
-          ...block,
-          toolCalls: block.toolCalls.map(tc => {
-            if (tc.toolCall.id !== message.toolCallId) {
-              return tc;
-            }
-            return {
-              ...tc,
-              toolResult: message.content as string,
-              isLoading: false,
-            };
-          }),
-        };
-      });
-    }
-
-    // A final assistant response (text content).
-    if (message.role === 'assistant' && message.content) {
-      // Find the index of the last assistant block that's waiting for a final response.
-      const lastAssistantBlockIndex = acc.findLastIndex(b => b.type === 'assistant' && !b.finalResponse);
-
-      if (lastAssistantBlockIndex !== -1) {
-        // This block was initiated by a tool_call message. Update it immutably.
-        return acc.map((block, index) => {
-          if (index !== lastAssistantBlockIndex) return block;
-          return { ...block, finalResponse: message };
+      // Assistant message that starts a tool call sequence.
+      if (isToolCallInitiator(message)) {
+        acc.push({
+          id: message.id,
+          type: 'assistant',
+          initiator: message,
+          // Map the tool calls to our UI structure, initially all loading.
+          toolCalls: message.toolCalls.map(tc => ({
+            toolCall: tc,
+            toolResult: null,
+            isLoading: true,
+          })),
         });
-      } else {
-        // This is a simple assistant message (no preceding tool calls).
-        // It could be a new message or a streaming update to an existing one.
-        const existingBlockIndex = acc.findIndex(b => b.initiator.id === message.id);
-        if (existingBlockIndex !== -1) {
-          // Update the existing simple message block immutably.
+        return acc;
+      }
+
+      // A tool result message. Find its corresponding block and update it immutably.
+      if (message.role === 'tool') {
+        return acc.map(block => {
+          // If this isn't the block we're looking for, return it unchanged.
+          if (!block.toolCalls?.some(tc => tc.toolCall.id === message.toolCallId)) {
+            return block;
+          }
+          // Otherwise, create a new block with the updated toolCall.
+          return {
+            ...block,
+            toolCalls: block.toolCalls.map(tc => {
+              if (tc.toolCall.id !== message.toolCallId) {
+                return tc;
+              }
+              return {
+                ...tc,
+                toolResult: message.content as string,
+                isLoading: false,
+              };
+            }),
+          };
+        });
+      }
+
+      // A final assistant response (text content).
+      if (message.role === 'assistant' && message.content) {
+        // Find the index of the last assistant block that's waiting for a final response.
+        const lastAssistantBlockIndex = acc.findLastIndex(b => b.type === 'assistant' && !b.finalResponse);
+
+        if (lastAssistantBlockIndex !== -1) {
+          // This block was initiated by a tool_call message. Update it immutably.
           return acc.map((block, index) => {
-            if (index !== existingBlockIndex) return block;
-            return { ...block, initiator: message, finalResponse: message };
+            if (index !== lastAssistantBlockIndex) return block;
+            return { ...block, finalResponse: message };
           });
         } else {
-          // Add a new simple message block.
-          return [...acc, { id: message.id, type: 'assistant', initiator: message, finalResponse: message }];
+          // This is a simple assistant message (no preceding tool calls).
+          // It could be a new message or a streaming update to an existing one.
+          const existingBlockIndex = acc.findIndex(b => b.initiator.id === message.id);
+          if (existingBlockIndex !== -1) {
+            // Update the existing simple message block immutably.
+            return acc.map((block, index) => {
+              if (index !== existingBlockIndex) return block;
+              return { ...block, initiator: message, finalResponse: message };
+            });
+          } else {
+            // Add a new simple message block.
+            return [...acc, { id: message.id, type: 'assistant', initiator: message, finalResponse: message }];
+          }
         }
       }
-    }
 
-    return acc;
-  }, []);
+      return acc;
+    }, []);
+  }, [messages]);
 
   return (
     <StickToBottom className={styles.messageList}>

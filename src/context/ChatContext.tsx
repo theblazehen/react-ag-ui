@@ -28,38 +28,40 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({
   onError,
   children,
 }) => {
+  const [messages, setMessages] = useState<AgMessage[]>(agent.messages);
+  const [state, setState] = useState<State>(agent.state);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const [_, setUpdateTrigger] = useState(0);
 
-  const forceUpdate = useCallback(() => {
-    setUpdateTrigger(val => val + 1);
-  }, []);
+  const handleStateChange = useCallback(() => {
+    setMessages([...agent.messages]);
+    setState({ ...agent.state });
+  }, [agent]);
 
   const subscriber = useCallback(() => ({
     onRunFailed: (params: { error: Error }) => {
       setError(params.error);
       setIsLoading(false);
       if (onError) onError(params.error);
-      forceUpdate();
+      handleStateChange();
     },
     onRunFinalized: () => {
       setIsLoading(false);
-      forceUpdate();
+      handleStateChange();
     },
     onNewMessage: () => {
-      forceUpdate();
+      handleStateChange();
     },
     onTextMessageContentEvent: () => {
-      forceUpdate();
+      handleStateChange();
     },
     onStateSnapshot: () => {
-      forceUpdate();
+      handleStateChange();
     },
     onStateDelta: () => {
-      forceUpdate();
+      handleStateChange();
     },
-  }), [forceUpdate, onError]);
+  }), [handleStateChange, onError]);
 
   const sendMessage = async (content: string) => {
     if (!agent || isLoading) return;
@@ -73,7 +75,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({
         role: 'user',
         content,
       });
-      forceUpdate();
+      handleStateChange();
 
       await agent.runAgent(undefined, subscriber());
     } catch (err) {
@@ -87,7 +89,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({
   const clearMessages = () => {
     if (agent) {
       agent.messages = [];
-      forceUpdate();
+      handleStateChange();
     }
   };
 
@@ -97,6 +99,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({
     setIsLoading(true);
     setError(null);
     agent.messages = [];
+    handleStateChange();
 
     try {
       await agent.runAgent(undefined, subscriber());
@@ -107,7 +110,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({
     } finally {
       setIsLoading(false);
     }
-  }, [agent, forceUpdate, onError, subscriber]);
+  }, [agent, handleStateChange, onError, subscriber]);
 
   useEffect(() => {
     if (threadId) {
@@ -118,10 +121,10 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({
 
   const value = {
     agent,
-    messages: agent?.messages || [],
+    messages,
     isLoading,
     error,
-    state: agent?.state || {},
+    state,
     sendMessage,
     clearMessages,
     loadHistory,
@@ -130,11 +133,3 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };
-
-export function useChat(): ChatContextValue {
-  const context = useContext(ChatContext);
-  if (context === undefined) {
-    throw new Error('useChat must be used within a ChatProvider');
-  }
-  return context;
-}

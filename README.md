@@ -16,8 +16,10 @@ This library provides the core UI components and state management needed to crea
 ## Installation
 
 ```bash
-npm install @theblazehen/react-ag-ui @ag-ui/client react react-dom
+npm install @theblazehen/react-ag-ui
 ```
+
+**Note:** This library has `react`, `react-dom`, and `@ag-ui/client` as peer dependencies. You will need to have them installed in your project.
 
 ## Quick Start
 
@@ -119,6 +121,7 @@ Here is a list of all available variables and their default values.
 | Variable                                   | Default (Light)                                                | Default (Dark)                               | Description                                  |
 | ------------------------------------------ | -------------------------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
 | `--ag-chat-primary-color`                  | `#007bff`                                                      | `#0d6efd`                                    | Primary brand color for buttons and accents. |
+| `--ag-chat-app-background`                 | `#f0f2f5`                                                      | `#121212`                                    | Background color of the application wrapping the chat. |
 | `--ag-chat-text-color`                     | `#212529`                                                      | `#e9ecef`                                    | Default text color.                          |
 | `--ag-chat-background`                     | `#ffffff`                                                      | `#212529`                                    | Main background color of the chat container. |
 | `--ag-chat-border-color`                   | `#dee2e6`                                                      | `#495057`                                    | Border color for elements.                   |
@@ -130,5 +133,12 @@ Here is a list of all available variables and their default values.
 | `--ag-chat-font-family`                    | `-apple-system, BlinkMacSystemFont, 'Segoe UI', ...`            | `-apple-system, BlinkMacSystemFont, 'Segoe UI', ...` | Font family for the chat components.         |
 | `--ag-chat-header-font-size`               | `1.1rem`                                                       | `1.1rem`                                     | Font size for the chat header.               |
 | `--ag-chat-message-font-size`              | `1rem`                                                         | `1rem`                                       | Font size for messages.                      |
+| `--ag-chat-tool-message-border-color`      | `#e0e0e0`                                                      | `#555`                                       | Border color for tool messages.              |
+| `--ag-chat-tool-message-background-color`  | `#f7f7f7`                                                      | `#333`                                       | Background color for tool messages.          |
+| `--ag-chat-tool-header-text-color`         | `#333`                                                         | `#eee`                                       | Text color for tool message headers.         |
+| `--ag-chat-tool-details-border-color`      | `#e0e0e0`                                                      | `#555`                                       | Border color for tool message details.       |
+| `--ag-chat-tool-details-strong-color`      | `#555`                                                         | `#ccc`                                       | Text color for strong text in tool details.  |
+| `--ag-chat-tool-details-pre-background-color` | `#fff`                                                         | `#222`                                       | Background color for preformatted text in tool details. |
+| `--ag-chat-tool-details-pre-border-color`  | `#ddd`                                                         | `#444`                                       | Border color for preformatted text in tool details. |
 | `--ag-chat-message-padding`                | `10px 15px`                                                    | `10px 15px`                                  | Padding inside message bubbles.              |
 | `--ag-chat-message-border-radius`          | `18px`                                                         | `18px`                                       | Border radius for message bubbles.           |

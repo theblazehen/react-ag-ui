@@ -1,5 +1,5 @@
 import React from 'react';
-import { useChat } from '../../context/ChatContext';
+import { useChat } from '../../hooks/useChat';
 import styles from './ChatHeader.module.css';
 
 export const ChatHeader: React.FC = () => {

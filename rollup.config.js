@@ -23,9 +23,8 @@ export default {
     postcss({
       extract: 'styles.css',
       modules: true,
-      use: ['sass'],
     }),
     typescript({ objectHashIgnoreUnknownHack: true, useTsconfigDeclarationDir: true }),
   ],
-  external: ['react', 'react-dom', '@ag-ui/client']
+  external: ['react', 'react-dom', 'react/jsx-runtime'],
 };

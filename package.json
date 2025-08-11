@@ -1,23 +1,25 @@
 {
   "name": "@theblazehen/react-ag-ui",
   "version": "1.0.0",
-  "description": "",
+  "description": "A lightweight and unopinionated React component library for building chat interfaces that connect to an AG-UI compliant backend.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "start:demo": "rollup -c rollup.config.demo.js -w"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "react",
+    "chat",
+    "ui",
+    "ag-ui"
+  ],
+  "author": "theblazehen",
   "license": "ISC",
   "type": "module",
   "dependencies": {
     "@ag-ui/client": "^0.0.35",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
     "react-markdown": "^10.1.0",
     "react-textarea-autosize": "^8.5.9",
     "remark-breaks": "^4.0.0",
@@ -32,11 +34,14 @@
     "@types/react-dom": "^19.1.7",
     "esbuild": "^0.25.8",
     "eslint": "^9.33.0",
-    "jest": "^30.0.5",
     "postcss": "^8.5.6",
     "rollup": "^4.46.2",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }

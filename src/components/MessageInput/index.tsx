@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import { useChat } from '../../context/ChatContext';
+import { useChat } from '../../hooks/useChat';
 import styles from './MessageInput.module.css';
 
 export const MessageInput: React.FC = () => {
