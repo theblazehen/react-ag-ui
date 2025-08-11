@@ -167,8 +167,6 @@ This will generate the distributable files in the `dist/` directory.
 
 ### Demo Application
 
-![Demo Application](docs/images/demo.png)
-
 To run the demo application locally, use:
 
 ```bash
