@@ -9,7 +9,7 @@ interface ChatProviderProps {
   children: React.ReactNode;
 }
 
-interface ChatContextValue {
+export interface ChatContextValue {
   agent: AbstractAgent;
   messages: AgMessage[];
   isLoading: boolean;

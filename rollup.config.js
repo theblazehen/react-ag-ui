@@ -24,7 +24,7 @@ export default {
       extract: 'styles.css',
       modules: true,
     }),
-    typescript({ objectHashIgnoreUnknownHack: true, useTsconfigDeclarationDir: true }),
+    typescript({ objectHashIgnoreUnknownHack: true }),
   ],
   external: ['react', 'react-dom', 'react/jsx-runtime', '@ag-ui/client'],
 };

@@ -5,4 +5,5 @@ export * from './components/UserMessage';
 export * from './components/AssistantMessage';
 export * from './components/ToolMessage';
 export * from './context/ChatContext';
+export * from './hooks/useChat';
 export * from './types/agent';
