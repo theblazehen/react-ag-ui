@@ -11,11 +11,12 @@ import { ThemeProvider, useTheme } from './ThemeContext';
 
 interface ChatWindowProps {
   threadId?: string;
+  loadHistory?: boolean;
   onClose: () => void;
   agentUrl: string;
 }
 
-const ChatWindow: React.FC<ChatWindowProps> = ({ threadId, onClose, agentUrl }) => {
+const ChatWindow: React.FC<ChatWindowProps> = ({ threadId, loadHistory, onClose, agentUrl }) => {
   const [agent] = React.useState(() => new HttpAgent({
     url: agentUrl,
     description: 'Chat',
@@ -26,7 +27,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ threadId, onClose, agentUrl }) 
       <button onClick={onClose} className={styles.closeButton}>
         &times;
       </button>
-      <ChatProvider agent={agent} threadId={threadId}>
+      <ChatProvider agent={agent} threadId={threadId} loadHistory={loadHistory}>
         <div className={styles.chatContainer}>
           <ChatHeader />
           <MessageList />
@@ -42,6 +43,7 @@ const AppContent: React.FC = () => {
   const [threads, setThreads] = useState<(string | undefined)[]>([undefined]);
   const [inputValue, setInputValue] = useState('');
   const [agentUrl, setAgentUrl] = useState('http://localhost:8000/agent/run');
+  const [loadHistory, setLoadHistory] = useState(false);
 
   const handleAddThread = () => {
     setThreads([inputValue || undefined, ...threads]);
@@ -71,6 +73,14 @@ const AppContent: React.FC = () => {
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Enter Thread ID to load"
         />
+        <label>
+          <input
+            type="checkbox"
+            checked={loadHistory}
+            onChange={(e) => setLoadHistory(e.target.checked)}
+          />
+          Load History
+        </label>
         <button onClick={handleAddThread}>Load Thread</button>
         <button onClick={handleNewThread}>New Thread</button>
         <button onClick={toggleTheme}>
@@ -82,6 +92,7 @@ const AppContent: React.FC = () => {
           <ChatWindow
             key={index}
             threadId={threadId}
+            loadHistory={loadHistory}
             onClose={() => handleCloseThread(index)}
             agentUrl={agentUrl}
           />

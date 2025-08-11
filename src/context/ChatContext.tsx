@@ -4,6 +4,7 @@ import { AbstractAgent, Message as AgMessage, State } from '@ag-ui/client';
 interface ChatProviderProps {
   agent: AbstractAgent;
   threadId?: string;
+  loadHistory?: boolean;
   onError?: (error: Error) => void;
   children: React.ReactNode;
 }
@@ -25,6 +26,7 @@ export const ChatContext = React.createContext<ChatContextValue | undefined>(und
 export const ChatProvider: React.FC<ChatProviderProps> = ({
   agent,
   threadId,
+  loadHistory: shouldLoadHistory = false,
   onError,
   children,
 }) => {
@@ -115,9 +117,11 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({
   useEffect(() => {
     if (threadId) {
       agent.threadId = threadId;
-      loadHistory();
+      if (shouldLoadHistory) {
+        loadHistory();
+      }
     }
-  }, [agent, threadId, loadHistory]);
+  }, [agent, threadId, shouldLoadHistory, loadHistory]);
 
   const value = {
     agent,

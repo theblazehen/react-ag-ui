@@ -73,7 +73,8 @@ The `ChatProvider` is the root component that manages the chat state. It must wr
 **Props:**
 
 -   `agent`: An instance of a class that extends `AbstractAgent` from `@ag-ui/client` (e.g., `HttpAgent`).
--   `threadId` (optional): A string representing the conversation thread to load. If provided, the chat will load the history for that thread.
+-   `threadId` (optional): A string representing the conversation thread to load.
+-   `loadHistory` (optional): A boolean flag that determines whether to automatically load history when a `threadId` is provided. Defaults to `false`. When `true` and `threadId` is provided, the chat will load the history for that thread by sending an agent request with an empty message list. **Note:** Your backend must support loading messages in this manner for history loading to work properly.
 
 ### Components
 
@@ -159,6 +160,8 @@ This will generate the distributable files in the `dist/` directory.
 
 ### Demo Application
 
+![Demo Application](docs/images/demo.png)
+
 To run the demo application locally, use:
 
 ```bash
@@ -167,4 +170,15 @@ npm run start:demo
 
 This will start a development server and watch for changes in the `demo/` directory.
 
-The demo application allows you to test the chat components in a local environment. You can specify the agent URL and load existing chat threads by providing a thread ID.
+The demo application allows you to test the chat components in a local environment. Features include:
+
+- **Agent URL Configuration**: Specify the backend agent URL (defaults to `http://localhost:8000/agent/run`)
+- **Thread Management**: Load existing chat threads by providing a thread ID, or create new threads
+- **Load History Toggle**: Use the "Load History" checkbox to control whether history is automatically loaded when a thread ID is provided
+- **Theme Switching**: Toggle between light and dark themes
+- **Multiple Chat Windows**: Open multiple chat sessions simultaneously
+
+**Usage:**
+1. Enter your agent URL in the first input field
+2. To load an existing thread: Enter the thread ID, check "Load History" if you want to load the conversation history, then click "Load Thread"
+3. To start a new conversation: Click "New Thread"
