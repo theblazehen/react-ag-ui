@@ -91,6 +91,23 @@ These components can be used within a `ChatProvider`.
 -   `<MessageList />`: Renders the list of messages in the conversation.
 -   `<MessageInput />`: Provides a text input and send button for the user.
 
+### Backend Integration
+
+**Dynamic Chat Title:**
+To set a dynamic chat title, your backend should update the shared state with a `chatTitle` property:
+
+```python
+# Example: Setting chat title from backend
+agent.state.chatTitle = "Customer Support - John Doe"
+```
+
+The `ChatHeader` component will automatically display this title and update in real-time when the backend changes it.
+
+**History Loading:**
+When `loadHistory={true}` is set and a `threadId` is provided, the frontend will call your agent with an empty message list. Your backend should detect this scenario and return the conversation history for that thread.
+
+This allows users to resume previous conversations when the history loading feature is enabled.
+
 ## Styling and Theming
 
 The library is designed to be easily themed using CSS Custom Properties (variables). You can override the default styles by redefining these variables in your own CSS file.
