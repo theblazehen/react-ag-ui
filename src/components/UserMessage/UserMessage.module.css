@@ -1,0 +1,20 @@
+.messageContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.messageBubble {
+  background-color: var(--ag-chat-user-message-bg);
+  color: var(--ag-chat-user-message-text-color);
+  padding: var(--ag-chat-message-padding);
+  border-radius: var(--ag-chat-message-border-radius);
+  max-width: 70%;
+  font-family: var(--ag-chat-font-family);
+  font-size: var(--ag-chat-message-font-size);
+  overflow-wrap: break-word;
+}
+
+.messageBubble :global(*) {
+  max-width: 100%;
+}

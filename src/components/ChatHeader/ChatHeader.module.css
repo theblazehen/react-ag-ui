@@ -1,0 +1,12 @@
+.header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--ag-chat-border-color);
+  background-color: var(--ag-chat-header-bg);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--ag-chat-header-font-size);
+  color: var(--ag-chat-text-color);
+  font-family: var(--ag-chat-font-family);
+}

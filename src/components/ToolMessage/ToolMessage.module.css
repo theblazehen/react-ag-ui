@@ -1,0 +1,50 @@
+.toolMessage {
+  border: 1px solid var(--tool-message-border-color, #e0e0e0);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: var(--tool-message-background-color, #f7f7f7);
+  font-family: Arial, sans-serif;
+}
+
+.toolHeader {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--tool-header-text-color, #333);
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.arrow {
+  margin-right: 8px;
+}
+
+.toolDetails {
+  padding: 0 12px 12px;
+  border-top: 1px solid var(--tool-details-border-color, #e0e0e0);
+}
+
+.toolDetails div {
+  margin-top: 8px;
+}
+
+.toolDetails strong {
+  font-size: 13px;
+  color: var(--tool-details-strong-color, #555);
+}
+
+.toolDetails pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: var(--tool-details-pre-background-color, #fff);
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--tool-details-pre-border-color, #ddd);
+  margin-top: 4px;
+  font-size: 12px;
+}

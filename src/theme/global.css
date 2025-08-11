@@ -1,0 +1,40 @@
+:root {
+  color-scheme: light;
+
+  /* Colors */
+  --ag-chat-primary-color: #007bff;
+  --ag-chat-text-color: #212529;
+  --ag-chat-background: #ffffff;
+  --ag-chat-border-color: #dee2e6;
+  --ag-chat-header-bg: #f8f9fa;
+  --ag-chat-user-message-bg: #007bff;
+  --ag-chat-user-message-text-color: #ffffff;
+  --ag-chat-assistant-message-bg: #f1f3f5;
+  --ag-chat-assistant-message-text-color: #212529;
+  --ag-chat-app-background: #f0f2f5;
+
+  /* Typography */
+  --ag-chat-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --ag-chat-header-font-size: 1.1rem;
+  --ag-chat-message-font-size: 1rem;
+
+  /* Spacing */
+  --ag-chat-message-padding: 10px 15px;
+  --ag-chat-message-border-radius: 18px;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Dark Mode Colors */
+  --ag-chat-primary-color: #0d6efd;
+  --ag-chat-text-color: #e9ecef;
+  --ag-chat-background: #212529;
+  --ag-chat-border-color: #495057;
+  --ag-chat-header-bg: #343a40;
+  --ag-chat-user-message-bg: #0d6efd;
+  --ag-chat-user-message-text-color: #ffffff;
+  --ag-chat-assistant-message-bg: #495057;
+  --ag-chat-assistant-message-text-color: #e9ecef;
+  --ag-chat-app-background: #121212;
+}

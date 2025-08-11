@@ -1,0 +1,19 @@
+:root {
+  --tool-message-border-color: #e0e0e0;
+  --tool-message-background-color: #f7f7f7;
+  --tool-header-text-color: #333;
+  --tool-details-border-color: #e0e0e0;
+  --tool-details-strong-color: #555;
+  --tool-details-pre-background-color: #fff;
+  --tool-details-pre-border-color: #ddd;
+}
+
+[data-theme='dark'] {
+  --tool-message-border-color: #555555;
+  --tool-message-background-color: #2a2a2a;
+  --tool-header-text-color: #ffffff;
+  --tool-details-border-color: #555555;
+  --tool-details-strong-color: #bbbbbb;
+  --tool-details-pre-background-color: #3a3a3a;
+  --tool-details-pre-border-color: #666666;
+}

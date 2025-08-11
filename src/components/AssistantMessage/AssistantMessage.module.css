@@ -1,0 +1,26 @@
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.toolCallContainer {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.messageBubble {
+  background-color: var(--ag-chat-assistant-message-bg);
+  color: var(--ag-chat-assistant-message-text-color);
+  padding: var(--ag-chat-message-padding);
+  border-radius: var(--ag-chat-message-border-radius);
+  max-width: 70%;
+  font-family: var(--ag-chat-font-family);
+  font-size: var(--ag-chat-message-font-size);
+  overflow-wrap: break-word;
+}
+
+.messageBubble :global(*) {
+  max-width: 100%;
+}
