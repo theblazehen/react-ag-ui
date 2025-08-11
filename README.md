@@ -1,4 +1,4 @@
-# @theblazehen/react-ag-ui
+# react-ag-ui
 
 A lightweight and unopinionated React component library for building chat interfaces that connect to an AG-UI compliant backend.
 
@@ -16,7 +16,7 @@ This library provides the core UI components and state management needed to crea
 ## Installation
 
 ```bash
-npm install @theblazehen/react-ag-ui
+npm install react-ag-ui
 ```
 
 **Note:** This library has `react`, `react-dom`, and `@ag-ui/client` as peer dependencies. You will need to have them installed in your project.
@@ -29,7 +29,7 @@ To get started, you need to wrap your chat components with the `ChatProvider` an
     In your main application file (e.g., `App.tsx` or `index.tsx`), import the stylesheet. This file contains all the necessary structural styles and default theme.
 
     ```tsx
-    import '@theblazehen/react-ag-ui/dist/styles.css';
+    import 'react-ag-ui/dist/styles.css';
     ```
 
 2.  **Set up the Chat:**
@@ -38,8 +38,8 @@ To get started, you need to wrap your chat components with the `ChatProvider` an
     ```tsx
     import React from 'react';
     import { HttpAgent, AbstractAgent } from '@ag-ui/client';
-    import { ChatProvider, ChatHeader, MessageList, MessageInput } from '@theblazehen/react-ag-ui';
-    import '@theblazehen/react-ag-ui/dist/styles.css';
+    import { ChatProvider, ChatHeader, MessageList, MessageInput } from 'react-ag-ui';
+    import 'react-ag-ui/dist/styles.css';
 
     // Configure an agent instance
     const agent: AbstractAgent = new HttpAgent({
@@ -142,3 +142,29 @@ Here is a list of all available variables and their default values.
 | `--ag-chat-tool-details-pre-border-color`  | `#ddd`                                                         | `#444`                                       | Border color for preformatted text in tool details. |
 | `--ag-chat-message-padding`                | `10px 15px`                                                    | `10px 15px`                                  | Padding inside message bubbles.              |
 | `--ag-chat-message-border-radius`          | `18px`                                                         | `18px`                                       | Border radius for message bubbles.           |
+
+## Development
+
+This project uses Rollup for bundling. There are two separate build configurations: one for the library and one for the demo application.
+
+### Library Build
+
+To build the library for production, run:
+
+```bash
+npm run build
+```
+
+This will generate the distributable files in the `dist/` directory.
+
+### Demo Application
+
+To run the demo application locally, use:
+
+```bash
+npm run start:demo
+```
+
+This will start a development server and watch for changes in the `demo/` directory.
+
+The demo application allows you to test the chat components in a local environment. You can specify the agent URL and load existing chat threads by providing a thread ID.

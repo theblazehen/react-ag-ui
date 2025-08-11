@@ -26,5 +26,5 @@ export default {
     }),
     typescript({ objectHashIgnoreUnknownHack: true, useTsconfigDeclarationDir: true }),
   ],
-  external: ['react', 'react-dom', 'react/jsx-runtime'],
+  external: ['react', 'react-dom', 'react/jsx-runtime', '@ag-ui/client'],
 };

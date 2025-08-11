@@ -12,11 +12,12 @@ import { ThemeProvider, useTheme } from './ThemeContext';
 interface ChatWindowProps {
   threadId?: string;
   onClose: () => void;
+  agentUrl: string;
 }
 
-const ChatWindow: React.FC<ChatWindowProps> = ({ threadId, onClose }) => {
+const ChatWindow: React.FC<ChatWindowProps> = ({ threadId, onClose, agentUrl }) => {
   const [agent] = React.useState(() => new HttpAgent({
-    url: 'http://localhost:8000/agent/run',
+    url: agentUrl,
     description: 'Chat',
   }));
 
@@ -40,6 +41,7 @@ const AppContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [threads, setThreads] = useState<(string | undefined)[]>([undefined]);
   const [inputValue, setInputValue] = useState('');
+  const [agentUrl, setAgentUrl] = useState('http://localhost:8000/agent/run');
 
   const handleAddThread = () => {
     setThreads([inputValue || undefined, ...threads]);
@@ -59,6 +61,12 @@ const AppContent: React.FC = () => {
       <div className={styles.controlsContainer}>
         <input
           type="text"
+          value={agentUrl}
+          onChange={(e) => setAgentUrl(e.target.value)}
+          placeholder="Enter Agent URL"
+        />
+        <input
+          type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Enter Thread ID to load"
@@ -75,6 +83,7 @@ const AppContent: React.FC = () => {
             key={index}
             threadId={threadId}
             onClose={() => handleCloseThread(index)}
+            agentUrl={agentUrl}
           />
         ))}
       </div>

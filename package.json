@@ -1,5 +1,5 @@
 {
-  "name": "@theblazehen/react-ag-ui",
+  "name": "react-ag-ui",
   "version": "1.0.0",
   "description": "A lightweight and unopinionated React component library for building chat interfaces that connect to an AG-UI compliant backend.",
   "main": "dist/index.js",
@@ -19,7 +19,6 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@ag-ui/client": "^0.0.35",
     "react-markdown": "^10.1.0",
     "react-textarea-autosize": "^8.5.9",
     "remark-breaks": "^4.0.0",
@@ -42,6 +41,7 @@
   },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "@ag-ui/client": "^0.0.35"
   }
 }
