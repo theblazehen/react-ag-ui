@@ -1,6 +1,6 @@
 {
   "name": "react-ag-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A lightweight and unopinionated React component library for building chat interfaces that connect to an AG-UI compliant backend.",
   "main": "dist/index.cjs",
   "module": "dist/index.es.js",
