@@ -23,25 +23,7 @@ interface UIBlock {
 export const MessageList: React.FC = () => {
   const { messages, isLoading } = useChat();
 
-  if (isLoading && messages.length === 0) {
-    return (
-      <div className={styles.messageList}>
-        <div className={styles.spinner}></div>
-      </div>
-    );
-  }
-
-  if (messages.length === 0) {
-    return (
-      <div className={styles.messageList}>
-        <div className={styles.emptyState}>
-          <h2>No messages yet</h2>
-          <p>Send a message to start the conversation.</p>
-        </div>
-      </div>
-    );
-  }
-
+  // Build UI blocks on every render to keep hook order consistent
   const uiBlocks = useMemo(() => {
     return messages.reduce<UIBlock[]>((acc, message) => {
       // User messages are simple: they create a new block.
@@ -121,6 +103,25 @@ export const MessageList: React.FC = () => {
       return acc;
     }, []);
   }, [messages]);
+
+  if (isLoading && messages.length === 0) {
+    return (
+      <div className={styles.messageList}>
+        <div className={styles.spinner}></div>
+      </div>
+    );
+  }
+
+  if (messages.length === 0) {
+    return (
+      <div className={styles.messageList}>
+        <div className={styles.emptyState}>
+          <h2>No messages yet</h2>
+          <p>Send a message to start the conversation.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <StickToBottom className={styles.messageList}>
