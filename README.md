@@ -204,3 +204,8 @@ The demo application allows you to test the chat components in a local environme
 1. Enter your agent URL in the first input field
 2. To load an existing thread: Enter the thread ID, check "Load History" if you want to load the conversation history, then click "Load Thread"
 3. To start a new conversation: Click "New Thread"
+## License
+
+This project is licensed under the GNU Lesser General Public License v3.0 (LGPL-3.0).
+
+See the [LICENSE](LICENSE) file for details.
